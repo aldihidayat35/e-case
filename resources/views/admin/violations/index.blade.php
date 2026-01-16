@@ -19,16 +19,22 @@
         </div>
 
         @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="alert alert-success d-flex align-items-center p-5 mb-10">
+            <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4"><span class="path1"></span><span class="path2"></span></i>
+            <div class="d-flex flex-column">
+                <h4 class="mb-1 text-success">Berhasil</h4>
+                <span>{{ session('success') }}</span>
+            </div>
         </div>
         @endif
 
         @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="alert alert-danger d-flex align-items-center p-5 mb-10">
+            <i class="ki-duotone ki-cross-circle fs-2hx text-danger me-4"><span class="path1"></span><span class="path2"></span></i>
+            <div class="d-flex flex-column">
+                <h4 class="mb-1 text-danger">Error</h4>
+                <span>{{ session('error') }}</span>
+            </div>
         </div>
         @endif
 
@@ -42,88 +48,29 @@
                             <span class="path1"></span>
                             <span class="path2"></span>
                         </i>
-                        <input type="text" class="form-control form-control-solid w-250px ps-13" placeholder="Cari jenis pelanggaran..." id="searchInput" />
+                        <input type="text" id="searchInput" class="form-control form-control-solid w-250px ps-13" placeholder="Cari jenis pelanggaran..." />
                     </div>
                 </div>
             </div>
             <!--end::Card header-->
 
             <!--begin::Card body-->
-            <div class="card-body pt-0">
+            <div class="card-body py-4">
                 <div class="table-responsive">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="violationsTable">
+                    <table id="violationsTable" class="table align-middle table-row-dashed fs-6 gy-5">
                         <thead>
-                            <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                <th class="min-w-50px ps-4">No</th>
+                            <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
+                                <th class="min-w-50px">No</th>
                                 <th class="min-w-200px">Nama Pelanggaran</th>
                                 <th class="min-w-100px text-center">Poin</th>
                                 <th class="min-w-200px">Keterangan</th>
-                                <th class="text-end min-w-150px pe-4">Aksi</th>
+                                <th class="text-end min-w-150px">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="fw-semibold text-gray-600">
-                            @forelse($violations as $index => $violation)
-                            <tr>
-                                <td class="ps-4">
-                                    <div class="badge badge-light-primary fw-bold">{{ $violations->firstItem() + $index }}</div>
-                                </td>
-                                <td>
-                                    <div class="d-flex flex-column">
-                                        <span class="text-gray-800 fw-bold mb-1">{{ $violation->name }}</span>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <span class="badge badge-light-danger fw-bold fs-6">{{ $violation->point_value }} Poin</span>
-                                </td>
-                                <td>
-                                    <span class="text-gray-600">{{ $violation->description ?? '-' }}</span>
-                                </td>
-                                <td class="text-end pe-4">
-                                    <a href="{{ route('admin.violations.edit', $violation) }}" class="btn btn-icon btn-light-primary btn-sm me-2" data-bs-toggle="tooltip" title="Edit">
-                                        <i class="ki-duotone ki-pencil fs-3">
-                                            <span class="path1"></span>
-                                            <span class="path2"></span>
-                                        </i>
-                                    </a>
-                                    <form action="{{ route('admin.violations.destroy', $violation) }}" method="POST" class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-icon btn-light-danger btn-sm" data-bs-toggle="tooltip" title="Hapus" onclick="return confirm('Yakin ingin menghapus jenis pelanggaran ini?\n\nNama: {{ $violation->name }}\nPoin: {{ $violation->point_value }}')">
-                                            <i class="ki-duotone ki-trash fs-3">
-                                                <span class="path1"></span>
-                                                <span class="path2"></span>
-                                                <span class="path3"></span>
-                                                <span class="path4"></span>
-                                                <span class="path5"></span>
-                                            </i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="5" class="text-center py-10">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <i class="fas fa-inbox fs-3x text-gray-400 mb-3"></i>
-                                        <span class="text-gray-600 fs-5">Belum ada data jenis pelanggaran</span>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforelse
+                        <tbody class="text-gray-600 fw-semibold">
                         </tbody>
                     </table>
                 </div>
-
-                @if($violations->hasPages())
-                <div class="d-flex justify-content-between align-items-center flex-wrap pt-5">
-                    <div class="text-gray-600">
-                        Menampilkan {{ $violations->firstItem() }} - {{ $violations->lastItem() }} dari {{ $violations->total() }} data
-                    </div>
-                    <div>
-                        {{ $violations->links() }}
-                    </div>
-                </div>
-                @endif
             </div>
             <!--end::Card body-->
         </div>
@@ -131,44 +78,93 @@
 
     </div>
 </div>
+@endsection
+
+@push('styles')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+@endpush
 
 @push('scripts')
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 <script>
-    // Initialize tooltips
-    document.addEventListener('DOMContentLoaded', function() {
-        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl);
-        });
-    });
-
-    // Search functionality
-    document.getElementById('searchInput').addEventListener('keyup', function() {
-        let searchValue = this.value.toLowerCase();
-        let tableRows = document.querySelectorAll('#violationsTable tbody tr');
-        let visibleCount = 0;
-
-        tableRows.forEach(row => {
-            // Skip empty state row
-            if (row.cells.length === 1 && row.cells[0].colSpan > 1) {
-                return;
+$(document).ready(function() {
+    var table = $('#violationsTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: "{{ route('admin.violations.index') }}"
+        },
+        columns: [
+            {
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex',
+                orderable: false,
+                searchable: false,
+                render: function(data, type, row, meta) {
+                    return '<div class="badge badge-light-primary fw-bold">' + (meta.row + meta.settings._iDisplayStart + 1) + '</div>';
+                }
+            },
+            {
+                data: 'name',
+                name: 'name',
+                render: function(data) {
+                    return '<span class="text-gray-800 fw-bold">' + data + '</span>';
+                }
+            },
+            {
+                data: 'point_value',
+                name: 'point_value',
+                className: 'text-center',
+                render: function(data) {
+                    return '<span class="badge badge-light-danger fw-bold fs-6">' + data + ' Poin</span>';
+                }
+            },
+            {
+                data: 'description',
+                name: 'description',
+                render: function(data) {
+                    return '<span class="text-gray-600">' + (data || '-') + '</span>';
+                }
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false,
+                className: 'text-end'
             }
-            
-            let text = row.textContent.toLowerCase();
-            if (text.includes(searchValue)) {
-                row.style.display = '';
-                visibleCount++;
-            } else {
-                row.style.display = 'none';
+        ],
+        order: [[1, 'asc']],
+        language: {
+            processing: "Memuat...",
+            lengthMenu: "Tampilkan _MENU_ data",
+            zeroRecords: "Tidak ada data jenis pelanggaran",
+            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+            infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+            infoFiltered: "(difilter dari _MAX_ total data)",
+            search: "Cari:",
+            paginate: {
+                first: "Pertama",
+                last: "Terakhir",
+                next: "Selanjutnya",
+                previous: "Sebelumnya"
             }
-        });
-
-        // Show/hide pagination based on search
-        const paginationDiv = document.querySelector('.d-flex.justify-content-between.align-items-center.flex-wrap.pt-5');
-        if (paginationDiv) {
-            paginationDiv.style.display = searchValue ? 'none' : '';
         }
     });
+
+    // Custom search
+    $('#searchInput').on('keyup', function() {
+        table.search(this.value).draw();
+    });
+
+    // Initialize tooltips
+    $('[data-bs-toggle="tooltip"]').tooltip();
+    
+    // Reinitialize tooltips after table redraw
+    table.on('draw', function() {
+        $('[data-bs-toggle="tooltip"]').tooltip();
+    });
+});
 </script>
 @endpush
-@endsection
