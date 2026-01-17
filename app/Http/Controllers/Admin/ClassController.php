@@ -15,12 +15,12 @@ class ClassController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $classes = ClassRoom::withCount('students')->select('classes.*');
+            $classes = ClassRoom::withCount('students')->get();
 
             return DataTables::of($classes)
                 ->addIndexColumn()
                 ->addColumn('students_count', function($class) {
-                    return $class->students_count ?? 0;
+                    return $class->students_count;
                 })
                 ->addColumn('action', function($class) {
                     $editUrl = route('admin.classes.edit', $class->id);
