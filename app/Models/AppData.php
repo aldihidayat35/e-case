@@ -12,11 +12,13 @@ class AppData extends Model
     protected $table = 'app_data';
 
     protected $fillable = [
+        'app_name',
         'school_name',
         'school_address',
         'school_phone',
         'school_email',
         'school_logo',
+        'favicon',
         'headmaster_name',
         'headmaster_nip',
         'school_accreditation',

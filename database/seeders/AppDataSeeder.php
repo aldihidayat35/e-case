@@ -15,6 +15,7 @@ class AppDataSeeder extends Seeder
         AppData::updateOrCreate(
             ['id' => 1],
             [
+                'app_name' => 'E-Case',
                 'school_name' => 'SMP Negeri 1 Jakarta',
                 'school_address' => 'Jl. Pendidikan Raya No. 123, Jakarta Selatan, DKI Jakarta 12345',
                 'school_phone' => '(021) 7234567',

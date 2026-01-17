@@ -312,9 +312,9 @@
                 <div class="card-body p-lg-17">
                     <div class="row">
                         <div class="col-lg-6">
-                            <h3 class="fw-bold text-gray-900 mb-5">📌 Tentang Sistem E-Case</h3>
-                            <p class="text-gray-600 fs-6 mb-4">
-                                <strong>E-Case (Electronic Case Management System)</strong> adalah platform berbasis web yang dirancang khusus untuk mencatat dan memantau pelanggaran serta penghargaan siswa secara transparan, objektif, dan efisien.
+                            <h3 class="fw-bold text-gray-900 mb-5">📌 Tentang Sistem {{ $appData->app_name ?? 'E-Case' }}</h3>
+                            <p class="text-gray-700 fs-5 mb-4">
+                                <strong>{{ $appData->app_name ?? 'E-Case' }} (Electronic Case Management System)</strong> adalah platform berbasis web yang dirancang khusus untuk mencatat dan memantau pelanggaran serta penghargaan siswa secara transparan, objektif, dan efisien.
                             </p>
                             <div class="mb-4">
                                 <h5 class="fw-bold text-gray-800 mb-3">🎯 Tujuan Sistem:</h5>
@@ -417,7 +417,7 @@
             <div class="card">
                 <div class="card-header border-0 pt-7">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold text-gray-800 fs-2">✨ Fitur Unggulan Sistem E-Case</span>
+                        <span class="card-label fw-bold text-gray-800 fs-2">✨ Fitur Unggulan Sistem {{ $appData->app_name ?? 'E-Case' }}</span>
                         <span class="text-gray-500 mt-1 fw-semibold fs-6">Berbagai kemudahan untuk mengelola kedisiplinan siswa</span>
                     </h3>
                 </div>

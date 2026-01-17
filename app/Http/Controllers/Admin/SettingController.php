@@ -18,11 +18,13 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         $request->validate([
+            'app_name' => 'required|string|max:255',
             'school_name' => 'required|string|max:255',
             'school_address' => 'nullable|string',
             'school_phone' => 'nullable|string|max:50',
             'school_email' => 'nullable|email|max:255',
             'school_logo' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'favicon' => 'nullable|image|mimes:ico,png|max:1024',
             'headmaster_name' => 'nullable|string|max:255',
             'headmaster_nip' => 'nullable|string|max:50',
             'school_accreditation' => 'nullable|string|max:10',
@@ -45,7 +47,20 @@ class SettingController extends Controller
             $appData->school_logo = $logoPath;
         }
 
+        // Handle favicon upload
+        if ($request->hasFile('favicon')) {
+            // Delete old favicon if exists
+            if ($appData->favicon && Storage::disk('public')->exists($appData->favicon)) {
+                Storage::disk('public')->delete($appData->favicon);
+            }
+
+            // Store new favicon
+            $faviconPath = $request->file('favicon')->store('logos', 'public');
+            $appData->favicon = $faviconPath;
+        }
+
         // Update other fields
+        $appData->app_name = $request->app_name;
         $appData->school_name = $request->school_name;
         $appData->school_address = $request->school_address;
         $appData->school_phone = $request->school_phone;

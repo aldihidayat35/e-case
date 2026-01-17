@@ -6,7 +6,10 @@
             $appData = \App\Models\AppData::getAppData();
         @endphp
         @if($appData->school_logo)
-            <img src="{{ $appData->logo_url }}" alt="Logo" class="symbol-label"/>
+            {{-- <img src="{{ $appData->logo_url }}" alt="Logo" class="symbol-label"/> --}}
+              <div class="symbol-label fs-2 fw-semibold text-white bg-primary">
+                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+            </div>
         @else
             <div class="symbol-label fs-2 fw-semibold text-white bg-primary">
                 {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}

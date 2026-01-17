@@ -12,7 +12,7 @@
         <a href="{{ route('admin.dashboard') }}" class="d-flex align-items-center">
             <img alt="Logo" src="{{ $appData->logo_url }}" class="h-45px me-3" />
             <div class="d-flex flex-column">
-                <span class="text-white fw-bold fs-3">E-Case</span>
+                <span class="text-white fw-bold fs-3">{{ $appData->app_name ?? 'E-Case' }}</span>
                 <span class="text-gray-600 fw-semibold fs-8">{{ $appData->school_name }}</span>
             </div>
         </a>

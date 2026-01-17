@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <base href=""/>
-    <title>@yield('title', 'Login') - {{ config('app.name', 'E-Case') }}</title>
+    <title>@yield('title', 'Login') - {{ $appData->app_name ?? config('app.name', 'E-Case') }}</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}"/>
+    <link rel="shortcut icon" href="{{ $appData->favicon ? asset('storage/' . $appData->favicon) : asset('assets/media/logos/favicon.ico') }}"/>
 
     <!--begin::Fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>

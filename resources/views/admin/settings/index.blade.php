@@ -42,6 +42,55 @@
                             @csrf
                             @method('PUT')
 
+                            <!--begin::Section: Pengaturan Aplikasi-->
+                            <div class="mb-10">
+                                <h3 class="fw-bold text-gray-900 mb-6">Pengaturan Aplikasi</h3>
+
+                                <!--begin::Row-->
+                                <div class="row mb-6">
+                                    <label class="col-lg-3 col-form-label required fw-semibold fs-6">Nama Aplikasi</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" name="app_name"
+                                            class="form-control form-control-solid @error('app_name') is-invalid @enderror"
+                                            value="{{ old('app_name', $appData->app_name) }}" required>
+                                        <div class="form-text">Nama aplikasi akan ditampilkan di header dan halaman login</div>
+                                        @error('app_name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!--end::Row-->
+
+                                <!--begin::Row-->
+                                <div class="row mb-6">
+                                    <label class="col-lg-3 col-form-label fw-semibold fs-6">Favicon</label>
+                                    <div class="col-lg-9">
+                                        @if ($appData->favicon)
+                                            <div class="mb-3">
+                                                <img src="{{ asset('storage/' . $appData->favicon) }}"
+                                                    alt="Favicon" class="img-thumbnail" style="max-height: 64px;">
+                                            </div>
+                                        @else
+                                            <div class="mb-3">
+                                                <img src="{{ asset('assets/media/logos/favicon.ico') }}"
+                                                    alt="Default Favicon" class="img-thumbnail" style="max-height: 64px;">
+                                            </div>
+                                        @endif
+                                        <input type="file" name="favicon"
+                                            class="form-control form-control-solid @error('favicon') is-invalid @enderror"
+                                            accept=".ico,.png">
+                                        <div class="form-text">Format: ICO atau PNG. Ukuran ideal: 32x32px. Maksimal 1MB</div>
+                                        @error('favicon')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!--end::Row-->
+                            </div>
+                            <!--end::Section-->
+
+                            <div class="separator separator-dashed my-10"></div>
+
                             <!--begin::Section: Informasi Sekolah-->
                             <div class="mb-10">
                                 <h3 class="fw-bold text-gray-900 mb-6">Informasi Sekolah</h3>

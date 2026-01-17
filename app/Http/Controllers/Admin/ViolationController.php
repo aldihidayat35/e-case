@@ -39,7 +39,7 @@ class ViolationController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        
+
         $pageData = $this->setPageData('Data Jenis Pelanggaran', [
             ['title' => 'Home', 'url' => route('admin.dashboard')],
             ['title' => 'Jenis Pelanggaran']

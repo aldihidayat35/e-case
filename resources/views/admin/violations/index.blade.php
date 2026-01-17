@@ -160,7 +160,7 @@ $(document).ready(function() {
 
     // Initialize tooltips
     $('[data-bs-toggle="tooltip"]').tooltip();
-    
+
     // Reinitialize tooltips after table redraw
     table.on('draw', function() {
         $('[data-bs-toggle="tooltip"]').tooltip();

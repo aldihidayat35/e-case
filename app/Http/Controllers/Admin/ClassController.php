@@ -19,19 +19,22 @@ class ClassController extends Controller
 
             return DataTables::of($classes)
                 ->addIndexColumn()
+                ->addColumn('students_count', function($class) {
+                    return $class->students_count ?? 0;
+                })
                 ->addColumn('action', function($class) {
                     $editUrl = route('admin.classes.edit', $class->id);
                     $deleteUrl = route('admin.classes.destroy', $class->id);
 
-                    return '<div class="d-flex gap-2">
-                        <a href="'.$editUrl.'" class="btn btn-sm btn-light btn-active-light-primary">
-                            <i class="ki-duotone ki-pencil fs-5"><span class="path1"></span><span class="path2"></span></i>Edit
+                    return '<div class="d-flex gap-2 justify-content-end">
+                        <a href="'.$editUrl.'" class="btn btn-icon btn-light-primary btn-sm" data-bs-toggle="tooltip" title="Edit">
+                            <i class="ki-duotone ki-pencil fs-3"><span class="path1"></span><span class="path2"></span></i>
                         </a>
-                        <form action="'.$deleteUrl.'" method="POST" class="d-inline" onsubmit="return confirm(\'Yakin ingin menghapus?\')">
+                        <form action="'.$deleteUrl.'" method="POST" class="d-inline">
                             '.csrf_field().'
                             '.method_field('DELETE').'
-                            <button type="submit" class="btn btn-sm btn-light btn-active-light-danger">
-                                <i class="ki-duotone ki-trash fs-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>Hapus
+                            <button type="submit" class="btn btn-icon btn-light-danger btn-sm" data-bs-toggle="tooltip" title="Hapus" onclick="return confirm(\'Yakin ingin menghapus kelas ini?\')">
+                                <i class="ki-duotone ki-trash fs-3"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
                             </button>
                         </form>
                     </div>';

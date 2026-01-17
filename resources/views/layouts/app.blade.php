@@ -14,19 +14,19 @@ License: For each use you must have a valid license purchased only from above li
     <!--begin::Head-->
     <head>
         <base href=""/>
-        <title>@yield('title', config('app.name', 'E-Case'))</title>
+        <title>@yield('title', $appData->app_name ?? config('app.name', 'E-Case'))</title>
         <meta charset="utf-8"/>
-        <meta name="description" content="@yield('description', 'E-Case Management System')"/>
+        <meta name="description" content="@yield('description', ($appData->app_name ?? 'E-Case') . ' Management System')"/>
         <meta name="keywords" content="@yield('keywords', 'e-case, student management, violation management')"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="article" />
-        <meta property="og:title" content="@yield('title', config('app.name', 'E-Case'))" />
+        <meta property="og:title" content="@yield('title', $appData->app_name ?? config('app.name', 'E-Case'))" />
         <meta property="og:url" content="{{ url()->current() }}"/>
-        <meta property="og:site_name" content="{{ config('app.name', 'E-Case') }}" />
+        <meta property="og:site_name" content="{{ $appData->app_name ?? config('app.name', 'E-Case') }}" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="canonical" href="{{ url()->current() }}"/>
-        <link rel="shortcut icon" href="{{ asset('assets/media/logos/favicon.ico') }}"/>
+        <link rel="shortcut icon" href="{{ $appData->favicon ? asset('storage/' . $appData->favicon) : asset('assets/media/logos/favicon.ico') }}"/>
 
         <!--begin::Fonts(mandatory for all pages)-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700"/>
