@@ -42,6 +42,73 @@
         canvas {
             max-width: 100% !important;
         }
+
+        /* Responsive menu and layout adjustments */
+        @media (max-width: 991.98px) {
+            .aside {
+                max-width: 250px;
+            }
+
+            .aside .menu-title {
+                font-size: 0.9rem;
+            }
+
+            .aside-user-info {
+                max-width: 150px;
+                overflow: hidden;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .aside .menu-item .menu-link {
+                padding: 0.5rem 0.75rem;
+            }
+
+            .aside .menu-icon {
+                margin-right: 0.5rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .aside-user-info {
+                max-width: 120px;
+            }
+
+            .aside-user-info .fs-6 {
+                font-size: 0.875rem !important;
+            }
+
+            .footer .text-muted {
+                font-size: 0.75rem;
+            }
+        }
+
+        .public-mobile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-bottom: 1px solid #e5e5e5;
+            background-color: #fff;
+            gap: 12px;
+        }
+
+        @media (min-width: 992px) {
+            .public-mobile-header {
+                display: none;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .page {
+                flex-direction: column;
+            }
+
+            #kt_aside {
+                position: fixed;
+                z-index: 105;
+            }
+        }
     </style>
 </head>
 
@@ -82,7 +149,7 @@
                 <div class="aside-menu flex-column-fluid">
                     <div class="hover-scroll-overlay-y mx-3 my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_toolbar" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="5px">
                         <!--begin::Menu-->
-                        <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
+                        <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="kt_aside_menu" data-kt-menu="true">
                             <!--begin:Menu item - Beranda-->
                             <div class="menu-item">
                                 <a class="menu-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">

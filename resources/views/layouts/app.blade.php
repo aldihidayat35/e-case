@@ -97,7 +97,17 @@ License: For each use you must have a valid license purchased only from above li
                 max-width: 100% !important;
             }
 
-            /* Responsive adjustments */
+            /* Responsive menu wrapper and user info */
+            .aside-user-info {
+                min-width: 0;
+            }
+
+            /* Prevent aside toolbar from overflowing */
+            .aside-toolbar {
+                overflow: hidden;
+            }
+
+            /* Make aside responsive on smaller screens */
             @media (max-width: 991.98px) {
                 .row.g-5, .row.g-xl-10 {
                     margin-left: -8px;
@@ -107,6 +117,36 @@ License: For each use you must have a valid license purchased only from above li
                 .row.g-5 > *, .row.g-xl-10 > * {
                     padding-left: 8px;
                     padding-right: 8px;
+                }
+
+                .aside-user-info {
+                    max-width: 150px;
+                }
+
+                .aside-user .symbol {
+                    flex-shrink: 0;
+                }
+            }
+
+            /* Extra small screen adjustments */
+            @media (max-width: 575.98px) {
+                .aside-user-info {
+                    max-width: 120px;
+                }
+
+                .menu-title {
+                    font-size: 0.9rem;
+                }
+            }
+
+            /* Public layout menu spacing for small screens */
+            @media (max-width: 767.98px) {
+                .aside .menu-item .menu-link {
+                    padding: 0.5rem 0.75rem;
+                }
+
+                .aside .menu-title {
+                    font-size: 0.875rem;
                 }
             }
         </style>

@@ -66,6 +66,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Fine & Point Reset
     Route::get('/fines', [StudentViolationController::class, 'fines'])->name('fines.index');
+    Route::post('/fines/reset-all', [StudentViolationController::class, 'resetAllPoints'])->name('fines.reset-all');
     Route::post('/fines/{student}/reset', [StudentViolationController::class, 'resetPoints'])->name('fines.reset');
 
     // Reward Management

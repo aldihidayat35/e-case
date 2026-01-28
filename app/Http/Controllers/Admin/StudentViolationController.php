@@ -190,6 +190,30 @@ class StudentViolationController extends Controller
     }
 
     /**
+     * Reset all students' points in bulk
+     */
+    public function resetAllPoints()
+    {
+        $studentsWithPoints = Student::where('total_points', '>', 0)->count();
+
+        if ($studentsWithPoints === 0) {
+            return back()->with('info', 'Tidak ada siswa dengan poin pelanggaran.');
+        }
+
+        DB::beginTransaction();
+
+        try {
+            Student::where('total_points', '>', 0)->update(['total_points' => 0]);
+            DB::commit();
+
+            return back()->with('success', 'Poin seluruh siswa berhasil direset.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Terjadi kesalahan saat reset massal: ' . $e->getMessage());
+        }
+    }
+
+    /**
      * Reset student points after fine verification
      */
     public function resetPoints(Request $request, Student $student)

@@ -1,7 +1,7 @@
 <!--begin::User-->
-<div class="aside-user d-flex align-items-sm-center justify-content-center py-5">
+<div class="aside-user d-flex align-items-sm-center justify-content-center py-5 px-3">
     <!--begin::Symbol-->
-    <div class="symbol symbol-50px">
+    <div class="symbol symbol-50px flex-shrink-0">
         @php
             $appData = \App\Models\AppData::getAppData();
         @endphp
@@ -20,14 +20,13 @@
 
     <!--end::Symbol-->
     <!--begin::Wrapper-->
-    <div class="aside-user-info flex-row-fluid flex-wrap ms-5">
+    <div class="aside-user-info flex-row-fluid flex-wrap ms-3 overflow-hidden">
         <!--begin::Section-->
-        <div class="d-flex">
+        <div class="d-flex flex-column w-100">
             <!--begin::Info-->
-            <div class="flex-grow-1 me-2">
+            <div class="flex-grow-1 me-2 overflow-hidden">
                 <!--begin::Username-->
-                <a href="#" class="text-white text-hover-primary fs-6 fw-bold">{{ auth()->user()->name }}</a>
-                <!--end::Username-->
+                <a href="#" class="text-white text-hover-primary fs-6 fw-bold text-truncate d-block">{{ auth()->user()->name }}</a>
                 <!--begin::Description-->
                 <span class="text-gray-600 fw-semibold d-block fs-8 mb-1">
                     {{ ucfirst(auth()->user()->role) }}

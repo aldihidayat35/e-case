@@ -5,7 +5,7 @@
     data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="5px">
     <!--begin::Menu-->
     <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
-        id="#kt_aside_menu" data-kt-menu="true">
+        id="kt_aside_menu" data-kt-menu="true">
 
         <!--begin:Menu item - Dashboard-->
         <div class="menu-item">
@@ -233,4 +233,3 @@
     <!--end::Menu-->
 </div>
 <!--end::Aside Menu-->
-    

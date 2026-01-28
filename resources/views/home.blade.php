@@ -161,7 +161,7 @@
             <div class="card card-flush h-100">
                 <div class="card-header pt-7">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bold text-gray-800">🔝 Top 5 Jenis Pelanggaran</span>
+                        <span class="card-label fw-bold text-gray-800">🔝 Top Jenis Pelanggaran</span>
                         <span class="text-gray-500 mt-1 fw-semibold fs-6">Pelanggaran yang paling sering terjadi</span>
                     </h3>
                 </div>
@@ -217,39 +217,40 @@
                                     <th class="p-0 pb-3 min-w-50px text-end">POIN</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @forelse($recentViolations->take(10) as $index => $violation)
-                                <tr>
-                                    <td class="text-start">
-                                        <span class="badge badge-light-primary fs-7 fw-bold">{{ $index + 1 }}</span>
-                                    </td>
-                                    <td class="text-start">
-                                        <span class="text-gray-800 fw-bold fs-6">{{ $violation->student->nis }}</span>
-                                    </td>
-                                    <td class="text-start">
-                                        <span class="text-gray-800 fw-bold d-block fs-6">{{ $violation->student->name }}</span>
-                                    </td>
-                                    <td class="text-start">
-                                        <span class="badge badge-light">{{ $violation->student->classRoom->name }}</span>
-                                    </td>
-                                    <td class="text-end">
-                                        @if($violation->student->total_points == 0)
-                                            <span class="badge badge-success">{{ $violation->student->total_points }}</span>
-                                        @elseif($violation->student->total_points < 20)
-                                            <span class="badge badge-warning">{{ $violation->student->total_points }}</span>
-                                        @else
-                                            <span class="badge badge-danger">{{ $violation->student->total_points }}</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td colspan="5" class="text-center py-10">
-                                        <span class="text-gray-500">Belum ada data siswa</span>
-                                    </td>
-                                </tr>
-                                @endforelse
-                            </tbody>
+                           <tbody>
+@forelse($topStudents as $index => $student)
+<tr>
+    <td class="text-start">
+        <span class="badge badge-light-primary fs-7 fw-bold">{{ $index + 1 }}</span>
+    </td>
+    <td class="text-start">
+        <span class="text-gray-800 fw-bold fs-6">{{ $student->nis }}</span>
+    </td>
+    <td class="text-start">
+        <span class="text-gray-800 fw-bold d-block fs-6">{{ $student->name }}</span>
+    </td>
+    <td class="text-start">
+        <span class="badge badge-light">{{ $student->classRoom->name }}</span>
+    </td>
+    <td class="text-end">
+        @if($student->total_points == 0)
+            <span class="badge badge-success">0</span>
+        @elseif($student->total_points < 20)
+            <span class="badge badge-warning">{{ $student->total_points }}</span>
+        @else
+            <span class="badge badge-danger">{{ $student->total_points }}</span>
+        @endif
+    </td>
+</tr>
+@empty
+<tr>
+    <td colspan="5" class="text-center py-10">
+        <span class="text-gray-500">Belum ada data siswa</span>
+    </td>
+</tr>
+@endforelse
+</tbody>
+
                         </table>
                     </div>
                 </div>

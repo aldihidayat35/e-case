@@ -17,6 +17,20 @@
         </div>
         @endif
 
+        @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
+        @if(session('info'))
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <i class="fas fa-info-circle me-2"></i>{{ session('info') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
         <!--begin::Info Alert-->
         <div class="alert alert-info d-flex align-items-center mb-5">
             <i class="fas fa-info-circle fs-2x me-4"></i>
@@ -124,9 +138,12 @@
                 @if($students->count() > 0)
                 <div class="separator my-5"></div>
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-danger" onclick="resetAllPoints()">
-                        <i class="fas fa-redo me-2"></i>Reset Semua Poin
-                    </button>
+                    <form action="{{ route('admin.fines.reset-all') }}" method="POST" id="resetAllPointsForm">
+                        @csrf
+                        <button type="button" class="btn btn-danger" onclick="confirmResetAll()">
+                            <i class="fas fa-redo me-2"></i>Reset Semua Poin
+                        </button>
+                    </form>
                 </div>
                 @endif
             </div>
@@ -151,10 +168,9 @@
     });
 
     // Reset all points
-    function resetAllPoints() {
+    function confirmResetAll() {
         if (confirm('Apakah Anda yakin ingin mereset poin SEMUA siswa? Tindakan ini tidak dapat dibatalkan!')) {
-            // You can implement this by creating a route for reset all
-            alert('Fitur reset semua akan segera tersedia. Saat ini, reset dilakukan per siswa.');
+            document.getElementById('resetAllPointsForm').submit();
         }
     }
 </script>

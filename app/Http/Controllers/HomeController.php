@@ -16,7 +16,7 @@ class HomeController extends Controller
     /**
      * Display public home page with leaderboard
      */
-    public function index()
+   public function index()
     {
         // Recent violations for transparency
         $recentViolations = StudentViolation::with(['student.classRoom', 'violation'])
@@ -31,25 +31,35 @@ class HomeController extends Controller
             ->get();
 
         // Statistics
-        $totalStudents = Student::count();
+        $totalStudents   = Student::count();
         $totalViolations = StudentViolation::count();
-        $totalRewards = Reward::count();
-        $totalClasses = ClassRoom::count();
+        $totalRewards    = Reward::count();
+        $totalClasses    = ClassRoom::count();
 
         // Student status by points
-        $goodStudents = Student::where('total_points', 0)->count();
-        $warningStudents = Student::where('total_points', '>', 0)->where('total_points', '<', 20)->count();
-        $dangerStudents = Student::where('total_points', '>=', 20)->count();
+        $goodStudents    = Student::where('total_points', 0)->count();
+        $warningStudents = Student::where('total_points', '>', 0)
+                                  ->where('total_points', '<', 20)
+                                  ->count();
+        $dangerStudents  = Student::where('total_points', '>=', 20)->count();
+
+        // ✅ Top 10 most disciplined students (INCLUDING point = 0)
+        $topStudents = Student::with('classRoom')
+            ->orderBy('total_points', 'asc')
+            ->orderBy('name', 'asc')
+            ->take(10)
+            ->get();
 
         // Monthly violations data (last 6 months)
         $monthlyData = [
             'labels' => [],
-            'data' => []
+            'data'   => []
         ];
+
         for ($i = 5; $i >= 0; $i--) {
             $month = Carbon::now()->subMonths($i);
             $monthlyData['labels'][] = $month->format('M Y');
-            $monthlyData['data'][] = StudentViolation::whereYear('date', $month->year)
+            $monthlyData['data'][]   = StudentViolation::whereYear('date', $month->year)
                 ->whereMonth('date', $month->month)
                 ->count();
         }
@@ -63,16 +73,15 @@ class HomeController extends Controller
         // Violations per class
         $classData = [
             'labels' => [],
-            'data' => []
+            'data'   => []
         ];
-        $classViolations = ClassRoom::withCount('students')
-            ->get();
+
+        $classViolations = ClassRoom::all();
         foreach ($classViolations as $class) {
             $classData['labels'][] = $class->name;
-            $violationCount = StudentViolation::whereHas('student', function($q) use ($class) {
+            $classData['data'][] = StudentViolation::whereHas('student', function ($q) use ($class) {
                 $q->where('class_id', $class->id);
             })->count();
-            $classData['data'][] = $violationCount;
         }
 
         // App Data
@@ -81,6 +90,7 @@ class HomeController extends Controller
         return view('home', compact(
             'recentViolations',
             'recentRewards',
+            'topStudents',
             'totalStudents',
             'totalViolations',
             'totalRewards',
