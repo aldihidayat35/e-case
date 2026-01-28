@@ -22,103 +22,24 @@
     <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css" rel="stylesheet" type="text/css"/>
     <!--end::DataTables-->
 
+    <!--begin::Responsive Styles-->
+    @vite(['resources/css/responsive.css'])
+    <!--end::Responsive Styles-->
+
     @stack('styles')
-
-    <style>
-        /* Prevent horizontal overflow */
-        html, body {
-            overflow-x: hidden;
-            max-width: 100%;
-        }
-
-        /* Ensure tables are responsive */
-        .table-responsive {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            width: 100%;
-        }
-
-        /* Fix chart overflow */
-        canvas {
-            max-width: 100% !important;
-        }
-
-        /* Responsive menu and layout adjustments */
-        @media (max-width: 991.98px) {
-            .aside {
-                max-width: 250px;
-            }
-
-            .aside .menu-title {
-                font-size: 0.9rem;
-            }
-
-            .aside-user-info {
-                max-width: 150px;
-                overflow: hidden;
-            }
-        }
-
-        @media (max-width: 767.98px) {
-            .aside .menu-item .menu-link {
-                padding: 0.5rem 0.75rem;
-            }
-
-            .aside .menu-icon {
-                margin-right: 0.5rem;
-            }
-        }
-
-        @media (max-width: 575.98px) {
-            .aside-user-info {
-                max-width: 120px;
-            }
-
-            .aside-user-info .fs-6 {
-                font-size: 0.875rem !important;
-            }
-
-            .footer .text-muted {
-                font-size: 0.75rem;
-            }
-        }
-
-        .public-mobile-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 16px;
-            border-bottom: 1px solid #e5e5e5;
-            background-color: #fff;
-            gap: 12px;
-        }
-
-        @media (min-width: 992px) {
-            .public-mobile-header {
-                display: none;
-            }
-        }
-
-        @media (max-width: 991.98px) {
-            .page {
-                flex-direction: column;
-            }
-
-            #kt_aside {
-                position: fixed;
-                z-index: 105;
-            }
-        }
-    </style>
 </head>
 
-<body id="kt_body" data-kt-app-page-loading-enabled="false" data-kt-app-page-loading="off" class="aside-enabled">
+<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-disabled">
+    <!--begin::Theme mode setup on page load-->
+    <script>var defaultThemeMode = "light"; var themeMode;</script>
+    <!--end::Theme mode setup on page load-->
+
     <!--begin::Root-->
     <div class="d-flex flex-column flex-root">
         <!--begin::Page-->
         <div class="page d-flex flex-row flex-column-fluid">
             <!--begin::Aside-->
-            <div id="kt_aside" class="aside" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: false, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
+            <div id="kt_aside" class="aside" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggle">
                 <!--begin::Aside Toolbar-->
                 <div class="aside-toolbar flex-column-auto" id="kt_aside_toolbar">
                     <!--begin::Aside user-->
@@ -224,7 +145,62 @@
 
             <!--begin::Wrapper-->
             <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+                <!--begin::Header-->
+                <div id="kt_header" class="header align-items-stretch" data-kt-sticky="true" data-kt-sticky-name="header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+                    <!--begin::Container-->
+                    <div class="container-fluid d-flex align-items-stretch justify-content-between">
+                        <!--begin::Aside toggle-->
+                        <div class="d-flex align-items-center d-lg-none ms-n3 me-1" title="Show aside menu">
+                            <div class="btn btn-icon btn-active-color-primary w-40px h-40px" id="kt_aside_toggle">
+                                <i class="ki-duotone ki-abstract-14 fs-1">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </div>
+                        </div>
+                        <!--end::Aside toggle-->
 
+                        <!--begin::Mobile logo-->
+                        <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
+                            <a href="{{ route('home') }}" class="d-lg-none">
+                                @if($appData && $appData->school_logo)
+                                    <img alt="Logo" src="{{ Storage::url($appData->school_logo) }}" class="h-30px"/>
+                                @else
+                                    <span class="fw-bold fs-5 text-primary">{{ $appData->app_name ?? 'E-Case' }}</span>
+                                @endif
+                            </a>
+                        </div>
+                        <!--end::Mobile logo-->
+
+                        <!--begin::Wrapper-->
+                        <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+                            <!--begin::Navbar-->
+                            <div class="d-flex align-items-stretch" id="kt_header_nav">
+                                <div class="d-flex align-items-center">
+                                    <span class="fs-5 fw-bold text-gray-800 d-none d-lg-inline">{{ $appData->app_name ?? 'E-Case' }} - Sistem Manajemen Pelanggaran Siswa</span>
+                                </div>
+                            </div>
+                            <!--end::Navbar-->
+
+                            <!--begin::Toolbar wrapper-->
+                            <div class="d-flex align-items-stretch flex-shrink-0">
+                                <div class="d-flex align-items-center ms-1 ms-lg-3">
+                                    <a href="{{ route('login') }}" class="btn btn-sm btn-primary">
+                                        <i class="ki-duotone ki-entrance-right fs-4 me-1">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                        </i>
+                                        Login
+                                    </a>
+                                </div>
+                            </div>
+                            <!--end::Toolbar wrapper-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Container-->
+                </div>
+                <!--end::Header-->
 
                 <!--begin::Content-->
                 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -233,8 +209,6 @@
                         @yield('content')
                     </div>
                     <!--end::Post-->
-
-
                 </div>
                 <!--end::Content-->
 
@@ -245,7 +219,7 @@
                             <span class="text-muted fw-semibold me-1">{{ date('Y') }}©</span>
                             <a href="{{ route('home') }}" class="text-gray-800 text-hover-primary">{{ $appData->school_name ?? 'E-Case System' }}</a>
                             @if($appData && $appData->school_address)
-                                <span class="text-muted d-block d-md-inline-block ms-md-2 mt-2 mt-md-0">
+                                <span class="text-muted d-none d-md-inline-block ms-2">
                                     <i class="ki-duotone ki-geolocation fs-5">
                                         <span class="path1"></span>
                                         <span class="path2"></span>
@@ -300,6 +274,39 @@
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
     <!--end::DataTables-->
+
+    <script>
+        // Handle horizontal scroll indicator for tables
+        document.addEventListener('DOMContentLoaded', function() {
+            const tableContainers = document.querySelectorAll('.table-responsive');
+            
+            tableContainers.forEach(function(container) {
+                checkScrollState(container);
+                
+                container.addEventListener('scroll', function() {
+                    checkScrollState(container);
+                });
+                
+                window.addEventListener('resize', function() {
+                    checkScrollState(container);
+                });
+            });
+            
+            function checkScrollState(container) {
+                const maxScrollLeft = container.scrollWidth - container.clientWidth;
+                
+                if (container.scrollLeft >= maxScrollLeft - 5) {
+                    container.classList.add('scrolled-right');
+                } else {
+                    container.classList.remove('scrolled-right');
+                }
+                
+                if (maxScrollLeft <= 0) {
+                    container.classList.add('scrolled-right');
+                }
+            }
+        });
+    </script>
 
     @stack('scripts')
 </body>

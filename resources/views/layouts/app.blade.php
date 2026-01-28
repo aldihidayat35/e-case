@@ -41,115 +41,12 @@ License: For each use you must have a valid license purchased only from above li
         <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css"/>
         <!--end::Global Stylesheets Bundle-->
 
+        <!--begin::Responsive Styles-->
+        @vite(['resources/css/responsive.css'])
+        <!--end::Responsive Styles-->
+
         <!--begin::Custom Styles-->
         @stack('styles')
-        <style>
-            /* Prevent horizontal overflow */
-            html, body {
-                overflow-x: hidden;
-                max-width: 100%;
-            }
-
-            .app-container {
-                max-width: 100%;
-                overflow-x: hidden;
-            }
-
-            /* Ensure all containers don't overflow */
-            #kt_app_content {
-                overflow-x: hidden;
-            }
-
-            #kt_app_content_container {
-                overflow-x: hidden;
-            }
-
-            /* Ensure tables are responsive */
-            .table-responsive {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                width: 100%;
-            }
-
-            /* Fix row overflow issues */
-            .row {
-                margin-left: -12px;
-                margin-right: -12px;
-            }
-
-            .row > * {
-                padding-left: 12px;
-                padding-right: 12px;
-            }
-
-            /* Ensure cards and content don't overflow */
-            .card {
-                max-width: 100%;
-                overflow: hidden;
-            }
-
-            .card-body {
-                overflow-x: auto;
-            }
-
-            /* Fix chart overflow */
-            [id*="chart"], canvas {
-                max-width: 100% !important;
-            }
-
-            /* Responsive menu wrapper and user info */
-            .aside-user-info {
-                min-width: 0;
-            }
-
-            /* Prevent aside toolbar from overflowing */
-            .aside-toolbar {
-                overflow: hidden;
-            }
-
-            /* Make aside responsive on smaller screens */
-            @media (max-width: 991.98px) {
-                .row.g-5, .row.g-xl-10 {
-                    margin-left: -8px;
-                    margin-right: -8px;
-                }
-
-                .row.g-5 > *, .row.g-xl-10 > * {
-                    padding-left: 8px;
-                    padding-right: 8px;
-                }
-
-                .aside-user-info {
-                    max-width: 150px;
-                }
-
-                .aside-user .symbol {
-                    flex-shrink: 0;
-                }
-            }
-
-            /* Extra small screen adjustments */
-            @media (max-width: 575.98px) {
-                .aside-user-info {
-                    max-width: 120px;
-                }
-
-                .menu-title {
-                    font-size: 0.9rem;
-                }
-            }
-
-            /* Public layout menu spacing for small screens */
-            @media (max-width: 767.98px) {
-                .aside .menu-item .menu-link {
-                    padding: 0.5rem 0.75rem;
-                }
-
-                .aside .menu-title {
-                    font-size: 0.875rem;
-                }
-            }
-        </style>
         <!--end::Custom Styles-->
 
         <script>
@@ -217,6 +114,43 @@ License: For each use you must have a valid license purchased only from above li
 
         <!--begin::Custom Javascript(used for this page only)-->
         @stack('scripts')
+
+        <script>
+            // Handle horizontal scroll indicator for tables
+            document.addEventListener('DOMContentLoaded', function() {
+                const tableContainers = document.querySelectorAll('.table-responsive');
+                
+                tableContainers.forEach(function(container) {
+                    // Check initial scroll state
+                    checkScrollState(container);
+                    
+                    // Listen for scroll events
+                    container.addEventListener('scroll', function() {
+                        checkScrollState(container);
+                    });
+                    
+                    // Listen for window resize
+                    window.addEventListener('resize', function() {
+                        checkScrollState(container);
+                    });
+                });
+                
+                function checkScrollState(container) {
+                    const maxScrollLeft = container.scrollWidth - container.clientWidth;
+                    
+                    if (container.scrollLeft >= maxScrollLeft - 5) {
+                        container.classList.add('scrolled-right');
+                    } else {
+                        container.classList.remove('scrolled-right');
+                    }
+                    
+                    // Also check if there's no horizontal scroll needed
+                    if (maxScrollLeft <= 0) {
+                        container.classList.add('scrolled-right');
+                    }
+                }
+            });
+        </script>
         <!--end::Custom Javascript-->
         <!--end::Javascript-->
     </body>

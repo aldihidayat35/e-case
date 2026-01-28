@@ -18,60 +18,60 @@
         <!--end::Page heading-->
 
         <!--begin::Row statistik-->
-        <div class="row g-5 g-xl-8 mb-5 mb-xl-8">
+        <div class="row g-3 g-lg-5 g-xl-8 mb-5 mb-xl-8">
             <!--begin::Col - Total Siswa-->
-            <div class="col-xl-3">
-                <div class="card card-xl-stretch mb-xl-8" style="background: linear-gradient(135deg, #F1416C 0%, #D81B60 100%);">
-                    <div class="card-body">
-                        <i class="ki-outline ki-people fs-3x text-white opacity-50 mb-7"></i>
-                        <div class="text-white fw-bold fs-2 mb-2 mt-5">{{ $totalStudents }}</div>
-                        <div class="fw-semibold text-white opacity-75">Total Siswa</div>
-                        <div class="text-white opacity-50 fs-7 mt-1">Terdaftar dalam sistem</div>
+            <div class="col-6 col-md-6 col-xl-3">
+                <div class="card card-xl-stretch statistics-card mb-xl-8" style="background: linear-gradient(135deg, #F1416C 0%, #D81B60 100%);">
+                    <div class="card-body p-3 p-md-4 p-lg-6">
+                        <i class="ki-outline ki-people fs-2x fs-lg-3x text-white opacity-50 mb-4 mb-lg-7"></i>
+                        <div class="text-white fw-bold fs-3 fs-lg-2 mb-1 mb-lg-2 mt-3 mt-lg-5">{{ $totalStudents }}</div>
+                        <div class="fw-semibold text-white opacity-75 fs-7 fs-lg-6">Total Siswa</div>
+                        <div class="text-white opacity-50 fs-8 fs-lg-7 mt-1 d-none d-md-block">Terdaftar dalam sistem</div>
                     </div>
                 </div>
             </div>
             <!--end::Col-->
 
             <!--begin::Col - Total Kelas-->
-            <div class="col-xl-3">
-                <div class="card card-xl-stretch mb-xl-8" style="background: linear-gradient(135deg, #00A3FF 0%, #0078D4 100%);">
-                    <div class="card-body">
-                        <i class="ki-outline ki-book-open fs-3x text-white opacity-50 mb-7"></i>
-                        <div class="text-white fw-bold fs-2 mb-2 mt-5">{{ $totalClasses }}</div>
-                        <div class="fw-semibold text-white opacity-75">Total Kelas</div>
-                        <div class="text-white opacity-50 fs-7 mt-1">Kelas aktif</div>
+            <div class="col-6 col-md-6 col-xl-3">
+                <div class="card card-xl-stretch statistics-card mb-xl-8" style="background: linear-gradient(135deg, #00A3FF 0%, #0078D4 100%);">
+                    <div class="card-body p-3 p-md-4 p-lg-6">
+                        <i class="ki-outline ki-book-open fs-2x fs-lg-3x text-white opacity-50 mb-4 mb-lg-7"></i>
+                        <div class="text-white fw-bold fs-3 fs-lg-2 mb-1 mb-lg-2 mt-3 mt-lg-5">{{ $totalClasses }}</div>
+                        <div class="fw-semibold text-white opacity-75 fs-7 fs-lg-6">Total Kelas</div>
+                        <div class="text-white opacity-50 fs-8 fs-lg-7 mt-1 d-none d-md-block">Kelas aktif</div>
                     </div>
                 </div>
             </div>
             <!--end::Col-->
 
             <!--begin::Col - Pelanggaran Hari Ini-->
-            <div class="col-xl-3">
-                <div class="card card-xl-stretch mb-xl-8" style="background: linear-gradient(135deg, #FFC700 0%, #FFB302 100%);">
-                    <div class="card-body">
-                        <i class="ki-outline ki-information fs-3x text-white opacity-50 mb-7"></i>
-                        <div class="text-white fw-bold fs-2 mb-2 mt-5">{{ $todayViolations }}</div>
-                        <div class="fw-semibold text-white opacity-75">Pelanggaran Hari Ini</div>
-                        <div class="text-white opacity-50 fs-7 mt-1">{{ now()->format('d M Y') }}</div>
+            <div class="col-6 col-md-6 col-xl-3">
+                <div class="card card-xl-stretch statistics-card mb-xl-8" style="background: linear-gradient(135deg, #FFC700 0%, #FFB302 100%);">
+                    <div class="card-body p-3 p-md-4 p-lg-6">
+                        <i class="ki-outline ki-information fs-2x fs-lg-3x text-white opacity-50 mb-4 mb-lg-7"></i>
+                        <div class="text-white fw-bold fs-3 fs-lg-2 mb-1 mb-lg-2 mt-3 mt-lg-5">{{ $todayViolations }}</div>
+                        <div class="fw-semibold text-white opacity-75 fs-7 fs-lg-6">Pelanggaran Hari Ini</div>
+                        <div class="text-white opacity-50 fs-8 fs-lg-7 mt-1 d-none d-md-block">{{ now()->format('d M Y') }}</div>
                     </div>
                 </div>
             </div>
             <!--end::Col-->
 
             <!--begin::Col - Poin Tertinggi-->
-            <div class="col-xl-3">
-                <div class="card card-xl-stretch mb-xl-8" style="background: linear-gradient(135deg, #7239EA 0%, #5014D0 100%);">
-                    <div class="card-body">
-                        <i class="ki-outline ki-abstract-26 fs-3x text-white opacity-50 mb-7"></i>
-                        <div class="text-white fw-bold fs-2 mb-2 mt-5">
+            <div class="col-6 col-md-6 col-xl-3">
+                <div class="card card-xl-stretch statistics-card mb-xl-8" style="background: linear-gradient(135deg, #7239EA 0%, #5014D0 100%);">
+                    <div class="card-body p-3 p-md-4 p-lg-6">
+                        <i class="ki-outline ki-abstract-26 fs-2x fs-lg-3x text-white opacity-50 mb-4 mb-lg-7"></i>
+                        <div class="text-white fw-bold fs-3 fs-lg-2 mb-1 mb-lg-2 mt-3 mt-lg-5">
                             @if($highestPointsStudent)
                                 {{ $highestPointsStudent->total_points }}
                             @else
                                 0
                             @endif
                         </div>
-                        <div class="fw-semibold text-white opacity-75">Poin Tertinggi</div>
-                        <div class="text-white opacity-50 fs-7 mt-1">
+                        <div class="fw-semibold text-white opacity-75 fs-7 fs-lg-6">Poin Tertinggi</div>
+                        <div class="text-white opacity-50 fs-8 fs-lg-7 mt-1 d-none d-md-block">
                             @if($highestPointsStudent)
                                 {{ Str::limit($highestPointsStudent->name, 20) }}
                             @else
@@ -86,18 +86,18 @@
         <!--end::Row-->
 
         <!--begin::Row-->
-        <div class="row gy-5 g-xl-8 mb-5 mb-xl-8">
+        <div class="row g-3 g-lg-5 gy-5 g-xl-8 mb-5 mb-xl-8">
             <!--begin::Col - Chart-->
-            <div class="col-xl-6 mb-5 mb-xl-8">
+            <div class="col-12 col-xl-6 mb-5 mb-xl-8">
                 <div class="card card-flush h-xl-100">
                     <!--begin::Header-->
-                    <div class="card-header pt-7 pb-3">
-                        <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bold text-gray-800 fs-3">Grafik Pelanggaran</span>
-                            <span class="text-gray-500 mt-1 fw-semibold fs-7">Visualisasi data pelanggaran siswa</span>
+                    <div class="card-header pt-4 pt-md-5 pt-lg-7 pb-3 flex-column flex-md-row">
+                        <h3 class="card-title align-items-start flex-column mb-3 mb-md-0">
+                            <span class="card-label fw-bold text-gray-800 fs-5 fs-lg-3">Grafik Pelanggaran</span>
+                            <span class="text-gray-500 mt-1 fw-semibold fs-8 fs-lg-7">Visualisasi data pelanggaran siswa</span>
                         </h3>
-                        <div class="card-toolbar">
-                            <select id="chartMode" class="form-select form-select-solid form-select-sm">
+                        <div class="card-toolbar w-100 w-md-auto">
+                            <select id="chartMode" class="form-select form-select-solid form-select-sm w-100">
                                 <option value="weekly">Mingguan</option>
                                 <option value="monthly">Bulanan</option>
                                 <option value="yearly">Tahunan</option>
@@ -106,8 +106,8 @@
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
-                    <div class="card-body pt-5">
-                        <div id="kt_violations_chart" style="height: 350px"></div>
+                    <div class="card-body pt-4 pt-lg-5">
+                        <div id="kt_violations_chart" style="height: 250px; max-height: 350px;"></div>
                     </div>
                     <!--end::Body-->
                 </div>
@@ -115,36 +115,36 @@
             <!--end::Col-->
 
             <!--begin::Col - Statistik Poin Siswa-->
-            <div class="col-xl-6 mb-5 mb-xl-8">
+            <div class="col-12 col-xl-6 mb-5 mb-xl-8">
                 <div class="card card-flush h-xl-100">
                     <!--begin::Header-->
-                    <div class="card-header pt-7 pb-3">
+                    <div class="card-header pt-4 pt-md-5 pt-lg-7 pb-3">
                         <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bold text-gray-800 fs-3">Statistik Poin Siswa</span>
-                            <span class="text-gray-500 mt-1 fw-semibold fs-7">Distribusi siswa berdasarkan poin</span>
+                            <span class="card-label fw-bold text-gray-800 fs-5 fs-lg-3">Statistik Poin Siswa</span>
+                            <span class="text-gray-500 mt-1 fw-semibold fs-8 fs-lg-7">Distribusi siswa berdasarkan poin</span>
                         </h3>
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
-                    <div class="card-body pt-5">
-                        <div id="kt_points_chart" style="height: 200px;"></div>
+                    <div class="card-body pt-4 pt-lg-5">
+                        <div id="kt_points_chart" style="height: 180px; max-height: 200px;"></div>
                         <!--begin::Legend-->
-                        <div class="d-flex flex-wrap justify-content-center pt-5">
-                            <div class="d-flex align-items-center me-6 mb-2">
-                                <span class="bullet bullet-dot bg-success h-10px w-10px me-2"></span>
-                                <span class="fw-semibold fs-7 text-gray-600">0-50 Poin ({{ $pointsStats['safe'] }})</span>
+                        <div class="d-flex flex-wrap justify-content-center pt-4 pt-lg-5 gap-2 gap-lg-3">
+                            <div class="d-flex align-items-center me-3 me-lg-6 mb-2">
+                                <span class="bullet bullet-dot bg-success h-8px w-8px h-lg-10px w-lg-10px me-2"></span>
+                                <span class="fw-semibold fs-8 fs-lg-7 text-gray-600">0-50 ({{ $pointsStats['safe'] }})</span>
                             </div>
-                            <div class="d-flex align-items-center me-6 mb-2">
-                                <span class="bullet bullet-dot bg-warning h-10px w-10px me-2"></span>
-                                <span class="fw-semibold fs-7 text-gray-600">50-100 Poin ({{ $pointsStats['warning'] }})</span>
+                            <div class="d-flex align-items-center me-3 me-lg-6 mb-2">
+                                <span class="bullet bullet-dot bg-warning h-8px w-8px h-lg-10px w-lg-10px me-2"></span>
+                                <span class="fw-semibold fs-8 fs-lg-7 text-gray-600">50-100 ({{ $pointsStats['warning'] }})</span>
                             </div>
-                            <div class="d-flex align-items-center me-6 mb-2">
-                                <span class="bullet bullet-dot bg-info h-10px w-10px me-2"></span>
-                                <span class="fw-semibold fs-7 text-gray-600">100-150 Poin ({{ $pointsStats['danger'] }})</span>
+                            <div class="d-flex align-items-center me-3 me-lg-6 mb-2">
+                                <span class="bullet bullet-dot bg-info h-8px w-8px h-lg-10px w-lg-10px me-2"></span>
+                                <span class="fw-semibold fs-8 fs-lg-7 text-gray-600">100-150 ({{ $pointsStats['danger'] }})</span>
                             </div>
                             <div class="d-flex align-items-center mb-2">
-                                <span class="bullet bullet-dot bg-danger h-10px w-10px me-2"></span>
-                                <span class="fw-semibold fs-7 text-gray-600">&gt;150 Poin ({{ $pointsStats['critical'] }})</span>
+                                <span class="bullet bullet-dot bg-danger h-8px w-8px h-lg-10px w-lg-10px me-2"></span>
+                                <span class="fw-semibold fs-8 fs-lg-7 text-gray-600">&gt;150 ({{ $pointsStats['critical'] }})</span>
                             </div>
                         </div>
                         <!--end::Legend-->
@@ -157,45 +157,45 @@
         <!--end::Row-->
 
         <!--begin::Row - Recent Violations-->
-        <div class="row gy-5 g-xl-8">
+        <div class="row g-3 g-lg-5 gy-5 g-xl-8">
             <!--begin::Col-->
-            <div class="col-xl-12">
+            <div class="col-12">
                 <div class="card card-flush h-xl-100">
                     <!--begin::Header-->
-                    <div class="card-header pt-7 pb-3">
-                        <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bold text-gray-800 fs-3">Pelanggaran Terbaru</span>
-                            <span class="text-gray-500 mt-1 fw-semibold fs-7">10 Pelanggaran terakhir yang tercatat</span>
+                    <div class="card-header pt-4 pt-md-5 pt-lg-7 pb-3 flex-column flex-md-row">
+                        <h3 class="card-title align-items-start flex-column mb-3 mb-md-0">
+                            <span class="card-label fw-bold text-gray-800 fs-5 fs-lg-3">Pelanggaran Terbaru</span>
+                            <span class="text-gray-500 mt-1 fw-semibold fs-8 fs-lg-7 d-none d-md-block">10 Pelanggaran terakhir yang tercatat</span>
                         </h3>
-                        <div class="card-toolbar">
-                            <a href="{{ route('admin.student-violations.index') }}" class="btn btn-sm btn-light-primary">
-                                <i class="ki-outline ki-eye fs-4 me-1"></i>Lihat Semua
+                        <div class="card-toolbar w-100 w-md-auto">
+                            <a href="{{ route('admin.student-violations.index') }}" class="btn btn-sm btn-light-primary w-100 w-md-auto">
+                                <i class="ki-outline ki-eye fs-4 me-1"></i><span class="d-none d-md-inline">Lihat Semua</span><span class="d-inline d-md-none">Semua</span>
                             </a>
                         </div>
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
-                    <div class="card-body pt-5">
+                    <div class="card-body pt-3 pt-md-4 pt-lg-5 px-3 px-md-4 px-lg-7">
                         @forelse($recentViolations as $violation)
                         <!--begin::Timeline item-->
-                        <div class="d-flex align-items-center mb-8">
+                        <div class="d-flex align-items-start mb-5 mb-md-6 mb-lg-8">
                             <!--begin::Bullet-->
-                            <span class="bullet bullet-vertical h-40px bg-danger me-5"></span>
+                            <span class="bullet bullet-vertical h-25px h-md-30px h-lg-40px bg-danger me-2 me-md-3 me-lg-5"></span>
                             <!--end::Bullet-->
                             <!--begin::Info-->
                             <div class="flex-grow-1">
-                                <div class="d-flex align-items-center flex-wrap mb-2">
-                                    <a href="{{ route('admin.students.show', $violation->student) }}" class="text-gray-800 text-hover-primary fw-bold fs-5 me-2">
-                                        {{ $violation->student->name }}
+                                <div class="d-flex align-items-center flex-wrap mb-1 mb-lg-2 gap-2">
+                                    <a href="{{ route('admin.students.show', $violation->student) }}" class="text-gray-800 text-hover-primary fw-bold fs-7 fs-lg-5">
+                                        {{ Str::limit($violation->student->name, 25) }}
                                     </a>
-                                    <span class="badge badge-light-danger fs-8 fw-bold">+{{ $violation->point }} Poin</span>
+                                    <span class="badge badge-light-danger fs-9 fs-lg-8 fw-bold">+{{ $violation->point }}</span>
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <span class="text-gray-800 fw-semibold fs-6 me-2">{{ $violation->violation->name }}</span>
-                                    <span class="text-gray-500 fw-semibold fs-7">• {{ $violation->student->classRoom->name }}</span>
+                                <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-1">
+                                    <span class="text-gray-800 fw-semibold fs-8 fs-md-7 fs-lg-6">{{ Str::limit($violation->violation->name, 30) }}</span>
+                                    <span class="text-gray-500 fw-semibold fs-9 fs-md-8 fs-lg-7 d-none d-md-inline">• {{ $violation->student->classRoom->name }}</span>
                                 </div>
-                                <span class="text-gray-500 fw-semibold fs-7 d-block mt-1">
-                                    <i class="ki-outline ki-time fs-7 me-1"></i>{{ $violation->created_at->diffForHumans() }}
+                                <span class="text-gray-500 fw-semibold fs-8 fs-lg-7 d-block mt-1">
+                                    <i class="ki-outline ki-time fs-8 fs-lg-7 me-1"></i>{{ $violation->created_at->diffForHumans() }}
                                 </span>
                             </div>
                             <!--end::Info-->
